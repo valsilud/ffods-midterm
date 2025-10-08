@@ -5,7 +5,7 @@ public class main {
     
     public static void viewStaff() {
         String votersQuery = "SELECT * FROM staff";
-        String[] votersHeaders = {"ID", "FName", "LName", "Email", "Role"};
+        String[] votersHeaders = {"ID", "First Name", "Last Name", "Email", "Role"};
         String[] votersColumns = {"staff_ID", "first_name", "last_name", "email", "role"};
         config con = new config();
         con.viewRecords(votersQuery, votersHeaders, votersColumns);
@@ -48,16 +48,44 @@ public class main {
 
                 case 2:
                     
-                        viewStaff();
+                    viewStaff();
                     
                     break;
 
                 case 3:
-                   
+                    viewStaff();
+                    
+                    System.out.print("Enter ID to update: ");
+                    int s_id = sc.nextInt();
+                    
+                    System.out.print("Enter New First Name: ");
+                    String nfname = sc.next();
+                    System.out.print("Enter New Last Name: ");
+                    String nlname = sc.next();
+                    System.out.print("Enter New Email: ");
+                    String nemail = sc.next();
+                    System.out.print("Enter New Password: ");
+                    String npass = sc.next();
+                    System.out.print("Enter New Role: ");
+                    String nrole = sc.next();
+                    
+                    String qry = "UPDATE staff SET first_name = ?, last_name = ?, email = ?, password = ?, role = ? WHERE staff_id = ?";
+                    con.updateRecord(qry, nfname, nlname, nemail, npass, nrole, s_id);
+                    
+                    viewStaff();
                     break;
 
                 case 4:
-                   
+                    viewStaff();
+                    
+                    System.out.print("Enter ID to delete: ");
+                    int del_id = sc.nextInt();
+                    
+                    String deleteSQL = "DELETE FROM staff WHERE staff_ID = ?";
+                    con.deleteRecord(deleteSQL, del_id);
+                    
+                    viewStaff();
+                    
                     break;
 
                 case 5:
